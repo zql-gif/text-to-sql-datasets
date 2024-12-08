@@ -1,7 +1,7 @@
 ## 自动化/半自动化dataset生成工具
 
 ### 生成sql
-[[Text-To-SQL Dataset#2 DuSQL A Large-Scale and Pragmatic Chinese Text-to-SQL Dataset]]
+[2 DuSQL](#2 DuSQL A Large-Scale and Pragmatic Chinese Text-to-SQL Dataset)
 ### 由sql生成nl question
 
 ### 由nl question生成sql
