@@ -59,6 +59,7 @@
 * Context-dependent
 ### links
 https://aclanthology.org/D19-1204.pdf
+
 [CoSQL: - 知乎](https://zhuanlan.zhihu.com/p/685978269)
 ### summary
 1. Conversational : 跨域通用数据库(DB)查询**对话系统**的语料库
@@ -124,6 +125,7 @@ https://aclanthology.org/2022.acl-long.142.pdf
 * Context-dependent
 ### links
 https://aclanthology.org/2022.findings-naacl.62.pdf
+
 https://blog.csdn.net/Luo_LA/article/details/136864928
 ### summary
 1. NLP compositional generalization is a major challenge: neural networks struggle with compositional generalization where training and test distributions differ
@@ -210,6 +212,7 @@ https://aclanthology.org/D19-1377/
 * Context-dependent
 ### links
 https://aclanthology.org/P19-1443/
+
 [SParC: Cross-Domain Semantic Parsing in Context 论文解读_数据集sparc-CSDN博客](https://blog.csdn.net/baidu_20163013/article/details/117187333)
 ### summary
 1. SParC : a dataset for cross-domain Semantic Parsing in Context. 
