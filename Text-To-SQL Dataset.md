@@ -1,17 +1,15 @@
 ## 0 自动化/半自动化dataset生成工具
 
 ### 生成sql
-[2 DuSQL](#2%20DuSQL_A%20Large%20Scale%20and%20Pragmatic%20Chinese%20Text%20to%20SQL%20Dataset)
-
 [2 DuSQL](#2-dusql_a-large-scale-and-pragmaticchinese-text-to-sqldataset)
 ### 由sql生成nl question
 
 ### 由nl question生成sql
-[3 CoSQL](#3%20CoSQL_A%20Conversational%20Text%20to%20SQL%20Challenge%20Towards%20Cross%20Domain%20Natural%20Language%20Interfaces%20to%20Databases)
+[3_CoSQL](#3-cosql_a-conversational-text-to-sql-challenge-towards-cross-domain-natural-language-interfaces-to-databases)
 
-[5 WikiSQL](#5%20Seq2SQL_Generating%20Structured%20Queries%20from%20Natural%20Language%20using%20Reinforcement%20Learning(WikiSQL))
+[5 WikiSQL](#5-seq2sql_generating-structured-queries-from-natural-language-using-reinforcement-learningwikisql)
 
-[8 Spider-SS, Spider-CG](#8%20Measuring%20and%20improving%20compositional%20generalization%20in%20text%20to%20SQL%20via%20component%20alignment(Spider-SS,Spider-CG))
+[8 Spider-SS, Spider-CG](#8-measuring-and-improving-compositional-generalization-in-text-to-sql-via-component-alignmentspider-ssspider-cg)
 
 ## 1 BIRD
 ### characteristics
