@@ -1,17 +1,13 @@
-## 自动化/半自动化dataset生成工具
+## 0 自动化/半自动化dataset生成工具
 
 ### 生成sql
-[2 DuSQL](#2 DuSQL A Large-Scale and Pragmatic Chinese Text-to-SQL Dataset)
+[2 DuSQL](#2%20DuSQL_A%20Large%20Scale%20and%20Pragmatic%20Chinese%20Text%20to%20SQL%20Dataset)
 ### 由sql生成nl question
 
 ### 由nl question生成sql
-[[Text-To-SQL Dataset#3 CoSQL A Conversational Text-to-SQL Challenge Towards Cross-Domain Natural Language Interfaces to Databases]]
-
-[[Text-To-SQL Dataset#5 Seq2SQL Generating Structured Queries from Natural Language using Reinforcement Learning (WikiSQL)]]
-
-[[Text-To-SQL Dataset#8 Measuring and improving compositional generalization in text-toSQL via component alignment(Spider-SS, Spider-CG)]]
-## Important Links
-[Text2SQL数据集和技术方案整理](https://www.zhihu.com/tardis/zm/art/683535421?source_id=1005)
+[3 CoSQL](#3%20CoSQL_A%20Conversational%20Text%20to%20SQL%20Challenge%20Towards%20Cross%20Domain%20Natural%20Language%20Interfaces%20to%20Databases)
+[5 WikiSQL](#5%20Seq2SQL_Generating%20Structured%20Queries%20from%20Natural%20Language%20using%20Reinforcement%20Learning(WikiSQL))
+[8 Spider-SS, Spider-CG](#8%20Measuring%20and%20improving%20compositional%20generalization%20in%20text%20to%20SQL%20via%20component%20alignment(Spider-SS,Spider-CG))
 
 ## 1 BIRD
 ### characteristics
@@ -19,14 +15,16 @@
 * Knowledge-augmented
 ### links
 [2305.03111](https://arxiv.org/pdf/2305.03111)
+
 [BIRD-SQL 论文速览 - 知乎](https://zhuanlan.zhihu.com/p/638719709)
+
 [DAMO-ConvAI/bird at main · AlibabaResearch/DAMO-ConvAI](https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/bird)
 ### summary
 1. 同时是Knowledge-augmented的
 2. **纯人工标注的**
 3. 首次提出VES
 
-## 2 DuSQL: A Large-Scale and Pragmatic Chinese Text-to-SQL Dataset
+## 2 DuSQL_A Large Scale and Pragmatic Chinese Text to SQL Dataset
 ### characteristics
 * Cross-domain
 * Cross-lingual
@@ -54,7 +52,7 @@
 4. tips
 * sql query和pseudo questions都是自动生成的，前者通过语法和约束解析得到AST，后者在AST的基础上结合descriptions for all components（sql components和NL description的一一对应）自动生成pseudo questions
 * NL question是人工parapharse pseudo questions得到的（这一步可否基于该标注好的数据集进行llm微调实现自动化？？，鉴于descriptions for all components是相对有限的且格式固定的，微调易获得较好效果）
-## 3 CoSQL: A Conversational Text-to-SQL Challenge Towards Cross-Domain Natural Language Interfaces to Databases
+## 3 CoSQL_A Conversational Text to SQL Challenge Towards Cross Domain Natural Language Interfaces to Databases
 
 ### characteristics
 * Cross-domain
@@ -78,7 +76,7 @@ https://aclanthology.org/D18-1425.pdf
 ### summary
 1. 纯人工标注的:  ask eight computer science students proficient in SQL to create 20-50 natural questions and their SQL labels. We did not use any template or script to generate question and SQL queries. 
 
-## 5 Seq2SQL: Generating Structured Queries from Natural Language using Reinforcement Learning (WikiSQL)
+## 5 Seq2SQL_Generating Structured Queries from Natural Language using Reinforcement Learning(WikiSQL)
 
 ### characteristics
 * Cross-domain
@@ -119,7 +117,7 @@ https://aclanthology.org/2022.acl-long.142.pdf
 2. 基于三个主流的Text-to-SQL数据集——Spider（Yu等，2018）、WikiSQL（Zhong等，2017）和WTQ（Papernot等，2017）**手动构建**的
 3. 人工标注的
 
-## 8 Measuring and improving compositional generalization in text-toSQL via component alignment(Spider-SS, Spider-CG)
+## 8 Measuring and improving compositional generalization in text to SQL via component alignment(Spider-SS,Spider-CG)
 
 ### characteristics
 * Cross-domain
@@ -234,3 +232,5 @@ https://aclanthology.org/2020.findings-emnlp.167.pdf
 1. 纯人工标注的数据集
 ## Others
 [GPT助教：文本到SQL转换 - 知乎](https://zhuanlan.zhihu.com/p/654135095)
+
+[Text2SQL数据集和技术方案整理](https://www.zhihu.com/tardis/zm/art/683535421?source_id=1005)
