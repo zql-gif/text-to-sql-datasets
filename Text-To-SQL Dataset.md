@@ -4,8 +4,8 @@
 [2 DuSQL](#2-dusql_a-large-scale-and-pragmaticchinese-text-to-sqldataset)
 ### 由sql生成nl question
 
-### 由nl question生成sql
 [3_CoSQL](#3-cosql_a-conversational-text-to-sql-challenge-towards-cross-domain-natural-language-interfaces-to-databases)
+### 由nl question生成sql
 
 [5 WikiSQL](#5-seq2sql_generating-structured-queries-from-natural-language-using-reinforcement-learningwikisql)
 
@@ -54,6 +54,7 @@
 4. tips
 * sql query和pseudo questions都是自动生成的，前者通过语法和约束解析得到AST，后者在AST的基础上结合descriptions for all components（sql components和NL description的一一对应）自动生成pseudo questions
 * NL question是人工parapharse pseudo questions得到的（这一步可否基于该标注好的数据集进行llm微调实现自动化？？，鉴于descriptions for all components是相对有限的且格式固定的，微调易获得较好效果）
+* 查一下为什么这样设计
 ## 3 CoSQL_A Conversational Text to SQL Challenge Towards Cross Domain Natural Language Interfaces to Databases
 
 ### characteristics
@@ -239,3 +240,7 @@ https://aclanthology.org/2020.findings-emnlp.167.pdf
 [GPT助教：文本到SQL转换 - 知乎](https://zhuanlan.zhihu.com/p/654135095)
 
 [Text2SQL数据集和技术方案整理](https://www.zhihu.com/tardis/zm/art/683535421?source_id=1005)
+
+
+
+
