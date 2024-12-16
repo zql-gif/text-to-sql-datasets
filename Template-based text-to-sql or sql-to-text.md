@@ -137,3 +137,11 @@ a template mechanism to represent semantics of query graph elements
 * Example: 对于自定义的模板 l(eσ(Students, Name)) = l(Students)+“ named ”，翻译结果为student named xxx
 
 ## 1.6 Query Translation
+### A Query Subject
+
+
+### B Query graph traversal
+
+
+### C Template Selection
+
