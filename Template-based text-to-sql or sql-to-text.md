@@ -32,21 +32,21 @@ Given a query q over a database D, we would like to generate a narrative that ca
 ## 1.4 Query Graph Representation
 ### A Database Graph
 符号解释如下：
-* D : a database comprises a set of relations
-* Ri : a relation with a set of attributes in database D
-* Aij(上下标) : an attribute of Ri
-* Database graph G(V, E) : a directed graph corresponding to the schema of D 
+1. D : a database comprises a set of relations
+2. Ri : a relation with a set of attributes in database D
+3. Aij(上下标) : an attribute of Ri
+4. Database graph G(V, E) : a directed graph corresponding to the schema of D 
 
 关于G(V,E)的点集V中点有 ：
-* R : relation nodes
-* A: attribute node
+1. R : relation nodes
+2. A: attribute node
 
 关于G(V,E)的边集E中边有 ：
-* membership edges, Eμ : connect an attribute node to its container relation node. 从属性点 Aij指向它的关系点Ri
-* selection edges, Eσ : connect each relation to each of its attributes. 这种边是为了体现select语句中关系relation和所选择的属性之间的联系，是双向的 
-* predicate edges, Eθ : emanate from an attribute node and ending at another attribute node. 代表两个不同关系之间的join，以各自的属性作为作为join的共同属性
+1. membership edges, Eμ : connect an attribute node to its container relation node. 从属性点 Aij指向它的关系点Ri
+2. selection edges, Eσ : connect each relation to each of its attributes. 这种边是为了体现select语句中关系relation和所选择的属性之间的联系，是双向的 
+3. predicate edges(谓词边), Eθ : emanate from an attribute node and ending at another attribute node. 代表两个不同关系之间的join，以各自的属性作为作为join的共同属性
 
-下面是一个例子，分别给出了database和对应表达了join关系的G(V,E)图：
+下面是一个例子，分别给出了database，表示两个relation之间join关系的G(V,E)图：
 ![example_course_database](attachment/example_course_database.png)
 
 
@@ -56,9 +56,49 @@ Given a query q over a database D, we would like to generate a narrative that ca
 
 ### B Query Graphs
 符号解释如下：
-* q : SPJ Query q是指一种由 **选择（Selection, S）**、**投影（Projection, P）** 和 **连接（Join, J）** 这三种关系操作组成的关系查询
-* Gq (Vq , Eq) : a directed graph that is an extension of the database graph G(V,E)
+1. q : SPJ Query q是指一种由 **选择（Selection, S）**、**投影（Projection, P）** 和 **连接（Join, J）** 这三种关系操作组成的关系查询
+2. Gq (Vq , Eq) : a directed graph that is an extension of the database graph G(V,E)
 
 关于Gq (Vq , Eq)的点集V中点有 ：
-* R : relation nodes
-* A: attribute node
+1. R : relation nodes
+2. A: attribute node
+3. value nodes : one for each value or a set of values
+
+关于Gq (Vq , Eq)的边集E中边有 ：
+1. membership edges, Eμ : connect an attribute node to its container relation node. 从属性点 Aij指向它的关系点Ri
+2. predicate edges(谓词边), Eθ : 
+* 形如 Aij θ Ω 的谓词构成了一个predicate edge，其中：Ω 可以是single value、a set of values，或者an attribute；θ 表示比较操作符（例如 =, <, >, <> 和 LIKE）
+* 如果 Ω是single value、a set of values，则称为**选择谓词边**（selection predicate edge），记作 Aij →(θ) Ω（例如， Ω是single value的情况，"age=30"；Ω是a set of values的情况，"ageIN(20,25,30)"）
+* 如果 Ω 是an attribute Akm，则称为**连接谓词边**（join predicate edge），记作Aij →(θ) Akm 以及Aij ←(θ‘) Akm，这是双向的边（例如，"salary>age"，如果 θ 为>，则θ’为<=）
+3. selection edges, Eσ : 
+* 形如 Aij θ Ω 的谓词，Aij和 Ω之间还包括selection edges
+* 如果 Ω是single value、a set of values，则存在从其容器关系 Ri到 Aij的选择边（selection edges），记作Ri →(σ) Aij，单向的
+* 如果 Ω 是an attribute Akm，则存在从其容器关系 Ri到 Aij的双向选择边（selection edges），记作Ri →(σ) Aij，和Ri  ← (σ) Aij
+
+下面是一个例子，分别给出了sql及其Gq (Vq , Eq)图：
+![sql_graph_example_1](attachment/sql_graph_example_1.png)
+
+![spj_query_graph](attachment/spj_query_graph.png)
+除了上面的内容，为了表示一些sql中的复杂查询结构（functions, expressions, and renaming operations as well as order-by, group-by and having clauses），文章用下面的edges和node types扩展了query graph：
+
+1. function nodes:  represent a function, an expression or a renaming operation that is applied on an attribute Aij or a set of attributes
+2. transformation edges，er: connect an attribute Aij with a function f that is applied to Aij. 链接attribute和运用在其上的function
+* 如果 Aij 出现在`SELECT` 子句中，则表示为 Aij ←(r) f
+- 如果 Aij 出现在`WHERE` 子句中，则表示为 Aij →(r) f  
+3. order edges, eo: represent an ordering
+* 如果查询结果按照属性 Aij,Akl,…排序，则定义一组排序边：第一条排序边从容器关系 Ri指向第一个排序属性 Aij，即Ri →(o) Aij；其余排序边按顺序依次连接每个排序属性，指向下一个排序属性，即 Aij →(o) Akl,…
+4. grouping edges, eγ: represent a grouping
+* 如果分组的属性依次为 Aij,Akl,…，则定义一组分组边：第一条分组边从容器关系 Ri 指向第一个分组属性 Aij、，即 Ri →(γ) Aij；剩余的分组边依次从当前属性指向下一个分组属性，即Aij →(γ) Akl,…
+5. having edges, eh: show attributes in having clauses, 对于关系 Ri 中的每个参与属性 Aij，定义一条边 Ri →(h) Aij
+
+上述添加的几条规则，其样例如下：
+![sql_graph_example_2](attachment/sql_graph_example_2.png)
+
+![spj_query_graph_2](attachment/spj_query_graph_2.png)
+
+下面还考虑了queries with nesting。Given a query q (the “parent” query), each subquery block qm in q is represented as a separate query subgraph. This subgraph is treated as a “virtual” relation and it is connected to the parent graph **depending on its position as follows**:
+太复杂了不想看，略
+
+## 1.5 Capturing Query Semantics
+a template mechanism to represent semantics of query graph elements
+
