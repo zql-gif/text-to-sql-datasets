@@ -101,4 +101,39 @@ Given a query q over a database D, we would like to generate a narrative that ca
 
 ## 1.5 Capturing Query Semantics
 a template mechanism to represent semantics of query graph elements
+### A Labels
+概念解释：
+1. node v：query graph中的每个节点
+2. label l of nodes, l(v) : the conceptual meaning of the node
+3. relation node ：比如“Student”这个relation node，它代表一个实体类型(entity type)
+4. function node：其conceptual meaning就是函数的输出，或者说是它实现的功能。例如，`max` 函数的conceptual meaning是“the greatest”
+5. expressions or unknown functions：使用 default labels ，比如 “an expression on” or “a function of”
+6. label of edges(path):  连接两个node的edge（或path）可以通过label进行annotate，来表示节点之间关系的自然语言含义，下面的图则显示了图3中的每条边的自然语义
 
+![spj_query_graph_labeled](attachment/spj_query_graph_labeled.png)
+
+上面的label即存在于database graph中，也存在于query graph中。label的提取如下：
+* Node labels 的自动提取 ：extracte from the names of database constructs using schema matching and entity resolution techniques
+* 人工提供fine-tuned labels：应该是设计师可以调整修改这些label
+
+### B Templates
+ 下面介绍 template labels at different granularity levels 和 an extensible template mechanism to fuse these labels
+
+1. A template label, l((v, u)) : is assigned to an edge (v, u) 
+* Generic template label form:   l((v, u)) = expr1 + l(v)+expr2 + l(u)+expr3 
+* expr1, expr2, expr3 is alphanumeric expressions ; the operator “+” acts as a concatenation operator
+* Use or regist template labels : use a template language (based on [8]) 
+
+2. generic templates
+* defined on edges
+* constructed automatically following the form ：l((v, u)) = expr1 + l(v)+expr2 + l(u)+expr3 
+* database-agnostic: 与数据库无关的
+* 确保template的extensibility：引入了template variables（见table I，展示了扩展时使用的默认值label），例如 Students →(σ) Name 的 l(eσ)为 “students whose name”
+![example_labels_for_template_construction](attachment/example_labels_for_template_construction.png)
+
+3. specific templates
+* defined both on edges and paths
+* created manually by a human（如存在，优先使用）
+* Example: 对于自定义的模板 l(eσ(Students, Name)) = l(Students)+“ named ”，翻译结果为student named xxx
+
+## 1.6 Query Translation
